@@ -315,7 +315,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>/
   <!--/ testimonial-->
   <!--cta 2-->
   <section id="cta-2" class="section-padding">
