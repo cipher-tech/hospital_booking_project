@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BookingController extends Controller
 {
@@ -35,7 +37,27 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            "name" => "required|min:3|max:50|string",
+            "email" => "required|min:3|max:70|email",
+            "subject" => "required|min:3|max:100|string",
+            "message" => "required|min:3|max:1000|string",
+        ])->validate();
+
+        // if ($validator->fails()) {
+        //     return redirect()->back()->with("errors", $validator->errors());
+        // }
+
+        $booking = new Booking([
+            "name" => $request->name,
+            "email" => $request->email,
+            "subject" => $request->subject,
+            "message" => $request->message,
+            "slug" => rand(0, 1000000),
+        ]);
+        $booking->save();
+
+        return redirect()->back()->with('message', "Appointment Booked Successfully");
     }
 
     /**
