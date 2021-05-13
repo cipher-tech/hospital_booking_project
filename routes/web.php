@@ -18,7 +18,8 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::post("createBooking", [BookingController::class, "store"])->name("createBooking");
+Route::post("/createBooking", [BookingController::class, "store"])->name("createBooking");
+Route::middleware(['auth:sanctum', 'verified'])->get("/mainAdmin", [BookingController::class, "index"])->name("indexAdmin");
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

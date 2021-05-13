@@ -16,7 +16,9 @@ class BookingController extends Controller
     public function index()
     {
         //
-        return null;
+        $bookings = Booking::paginate(10);
+        $total = Booking::count();
+        return view("admin.index", compact("bookings","total"));
     }
 
     /**
@@ -39,9 +41,9 @@ class BookingController extends Controller
     {
         $validator = Validator::make($request->all(),[
             "name" => "required|min:3|max:50|string",
-            "email" => "required|min:3|max:70|email",
-            "subject" => "required|min:3|max:100|string",
-            "message" => "required|min:3|max:1000|string",
+            "email" => "required|min:6|max:70|email",
+            "subject" => "required|min:10|max:100|string",
+            "message" => "required|min:10|string",
         ])->validate();
 
         // if ($validator->fails()) {
@@ -56,8 +58,8 @@ class BookingController extends Controller
             "slug" => rand(0, 1000000),
         ]);
         $booking->save();
-
-        return redirect()->back()->with('message', "Appointment Booked Successfully");
+        // $message = "Appointment successful";
+        return view("createBooking")->with('message', "Appointment Booked Successfully"); // view("createBooking", compact("message")); //()->back()->with('message', "Appointment Booked Successfully");
     }
 
     /**

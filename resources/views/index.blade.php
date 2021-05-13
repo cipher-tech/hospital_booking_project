@@ -13,12 +13,6 @@
     <link rel="stylesheet" type="text/css" href="Medilab/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="Medilab/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="Medilab/css/style.css">
-    <!-- =======================================================
-    Theme Name: Medilab
-    Theme URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
-    Author: BootstrapMade.com
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
 </head>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
@@ -384,14 +378,19 @@
                                 <p class="text-danger">{{ __($error) }}</p>
                             @endforeach
                         </div>
-                        @if (session('message'))
+                        {{-- @if (session('message'))
                             <div class="mb-4 font-medium text-sm text-green-600">
-                                {{ session('errors') }}
+                                {{ session('message') }}
                             </div>
                         @endif
-                        <form action="{{route("createBooking")}}" method="post" role="form" class="contactForm">
-                          @csrf  
-                          <div class="form-group">
+                        @if (!empty($successMsg))
+                            <div class="alert alert-success"> {{ $successMsg }}</div>
+                          
+                        @endif --}}
+                        <form action="{{ route('createBooking') }}" method="post" role="form"
+                            class="contactForm">
+                            @csrf
+                            <div class="form-group">
                                 <input type="text" name="name" class="form-control br-radius-zero" id="name"
                                     placeholder="Your Name" data-rule="minlen:3"
                                     data-msg="Please enter at least 4 chars" />
@@ -404,13 +403,13 @@
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control br-radius-zero" name="subject" id="subject"
-                                    placeholder="Subject" data-rule="minlen:4"
+                                    placeholder="Subject" data-rule="minlen:10"
                                     data-msg="Please enter at least 8 chars of subject" />
                                 <div class="validation"></div>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control br-radius-zero" name="message" rows="5"
-                                    data-rule="required" data-msg="Please write something for us"
+                                <textarea class="form-control br-radius-zero" name="message" rows="5" required
+                                    {{-- data-rule="required" --}} data-rule="minlen:10" data-msg="message must be at least 10"
                                     placeholder="Message"></textarea>
                                 <div class="validation"></div>
                             </div>
@@ -471,7 +470,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        © Copyright Medilab Theme. All Rights Reserved
+                        © Copyright Melody. All Rights Reserved
                         <div class="credits">
                             <!--
                 All the links in the footer should remain intact.
@@ -479,7 +478,7 @@
                 Licensing information: https://bootstrapmade.com/license/
                 Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Medilab
               -->
-                            Designed by <a href="https://bootstrapmade.com/">BootstrapMade.com</a>
+                            Designed by <a href="https://bootstrapmade.com/">Cipher-tech</a>
                         </div>
                     </div>
                 </div>
@@ -492,7 +491,7 @@
     <script src="Medilab/js/jquery.easing.min.js"></script>
     <script src="Medilab/js/bootstrap.min.js"></script>
     <script src="Medilab/js/custom.js"></script>
-    <script src="Medilab/contactform/contactformxxx.js"></script>
+    <script src="Medilab/contactform/contactform.js"></script>
 
 </body>
 
